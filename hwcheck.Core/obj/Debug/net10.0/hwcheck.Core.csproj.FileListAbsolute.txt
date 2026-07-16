@@ -1,5 +1,0 @@
-C:\Users\Windows\hwcheck\hwcheck.Core\obj\Debug\net10.0\hwcheck.Core.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Windows\hwcheck\hwcheck.Core\obj\Debug\net10.0\hwcheck.Core.AssemblyInfoInputs.cache
-C:\Users\Windows\hwcheck\hwcheck.Core\obj\Debug\net10.0\hwcheck.Core.AssemblyInfo.cs
-C:\Users\Windows\hwcheck\hwcheck.Core\obj\Debug\net10.0\hwcheck.Core.csproj.CoreCompileInputs.cache
-C:\Users\Windows\hwcheck\hwcheck.Core\obj\Debug\net10.0\hwcheck.Core.sourcelink.json

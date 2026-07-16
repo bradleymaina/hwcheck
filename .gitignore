@@ -1,14 +1,2 @@
-# Generated reports (contain sensitive machine data)
-Reports/
-
-# Windows system files
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-$RECYCLE.BIN/
-
-# Temp files
-*.tmp
-*.log
-*.bak
-~$*
+hwcheck.Core/bin/
+hwcheck.Core/obj/
