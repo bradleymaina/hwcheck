@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="hwcheck.Console/hwcheck.Console.csproj" />
+  <Project Path="hwcheck.Core/hwcheck.Core.csproj" />
+</Solution>

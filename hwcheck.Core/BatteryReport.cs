@@ -1,5 +1,6 @@
 ﻿using System;
 using Windows.Devices.Power;
+using System.Management;
 
 namespace Battery
 {
@@ -12,9 +13,9 @@ namespace Battery
             var designCapacity = report.DesignCapacityInMilliwattHours ?? 0;
             var fullChargeCapacity = report.FullChargeCapacityInMilliwattHours ?? 0;
 
-            if (fullChargeCapacity == 0)
+            if (designCapacity == 0 || fullChargeCapacity == 0)
             {
-                Console.WriteLine("Cannot determine battery health because full charge capacity is unknown or zero.");
+                Console.WriteLine("Cannot determine battery health because design capacity or full charge capacity is unknown or zero.");
                 return;
             }
 
@@ -32,14 +33,73 @@ namespace Battery
                 Console.WriteLine("Warning: Battery health is Poor.");
             }
         }
-    }
+        /// <summary>
+        /// Retrieves the battery Cycle Count using WMI (Windows Management Instrumentation).
+        /// Returns nill if the cycle count is not  supported or cannot be retrieved.
+        /// </summary>
+        public int? GetBatteryCycleCount()
+        {
+            try
+            {
+                var scope = new ManagementScope(@"\\.\root\wmi");
+                scope.Connect();
 
+                var query = new ObjectQuery("SELECT CycleCount FROM BatteryCycleCount");
+
+                using var searcher = new ManagementObjectSearcher(scope, query);
+                foreach (ManagementObject obj in searcher.Get())
+                {
+                    if (obj["CycleCount"] is int cycleCount)
+                    {
+                        return cycleCount;
+                    }
+
+                    if (obj["CycleCount"] is uint uintCycleCount)
+                    {
+                        return (int)uintCycleCount;
+                    }
+
+                    if (obj["CycleCount"] is string stringCycleCount && int.TryParse(stringCycleCount, out var parsedCycleCount))
+                    {
+                        return parsedCycleCount;
+                    }
+                }
+            }
+            catch (ManagementException)
+            {
+                return null;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+            return null;
+        }
+    }
     public static class Program
     {
         public static void Main()
         {
             var batteryInfo = new BatteryInfo();
             batteryInfo.GetBatteryHealth();
+
+            var cycleCount = batteryInfo.GetBatteryCycleCount();
+            Console.WriteLine(cycleCount is null
+                ? "Battery cycle count is not available on this device."
+                : $"Battery cycle count: {cycleCount}");
+            if (cycleCount == 0)
+            {
+                Console.WriteLine("Your hardware does not expose the battery cycle count. This is common on some devices, especially laptops that do not provide this information through WMI.");
+            }else if (cycleCount > 1000)
+            {
+                Console.WriteLine("Warning: Your battery cycle count is unusually high. This may indicate that your battery has been heavily used and may be nearing the end of its lifespan.");
+            }else
+            {
+                Console.WriteLine("Your battery cycle count is within a normal range.");
+            }
+            
+            
         }
     }
 }
