@@ -90,10 +90,13 @@ namespace Battery
             HardwareInfoRetriever retriever = new HardwareInfoRetriever();
 
             //call the method
-            string serialNumber = retriever.GetHardwareSpecs();
+            string serialNumber = retriever.GetSerialNumber();
+            string LaptopModel = retriever.GetLaptopModel();
+
             Console.WriteLine("---------------------------------");
             Console.WriteLine("\tSystem Specifications\t");
             Console.WriteLine("---------------------------------");
+            Console.WriteLine($"Laptop Model: {LaptopModel}");
             Console.WriteLine($"Serial Number: {serialNumber}");
             Console.WriteLine("\n");
             Console.WriteLine("---------------------------------");
