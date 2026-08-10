@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "HvnZ1IWF7aM=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Windows\\hwcheck\\hwcheck.Core\\hwcheck.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Windows\\.nuget\\packages\\system.codedom\\9.0.2\\system.codedom.9.0.2.nupkg.sha512",
+    "C:\\Users\\Windows\\.nuget\\packages\\system.management\\9.0.2\\system.management.9.0.2.nupkg.sha512",
+    "C:\\Users\\Windows\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.22621.57\\microsoft.windows.sdk.net.ref.10.0.22621.57.nupkg.sha512"
+  ],
+  "logs": []
+}
